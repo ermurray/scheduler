@@ -13,6 +13,9 @@ import InterviewerList from "components/InterviewerList";
 import Appointment from "components/Appointment/index";
 import Header from "components/Appointment/Header"
 import Empty from "components/Appointment/Empty";
+import Show from "components/Appointment/Show";
+import Confirm from "components/Appointment/Confirm";
+
 
 storiesOf("Button", module)
   .addParameters({
@@ -130,21 +133,42 @@ storiesOf("InterviewerList", module)
     />
   ));
 
+  const person = {
+    id: 1,
+    name: "Lydia Miller-Jones",
+    avatar: "https://images-na.ssl-images-amazon.com/images/M/MV5BODFjZTkwMjItYzRhMS00OWYxLWI3YTUtNWIzOWQ4Yjg4NGZiXkEyXkFqcGdeQXVyMTQ0ODAxNzE@._V1_UX172_CR0,0,172,256_AL_.jpg"
+  };
+
 
 storiesOf("Appointment", module)
-    .addParameters({
-        backgrounds: [{name: "white", value: "#fff", default: true}]
-    })
-    .add("Appointment", () => <Appointment />)
-    .add("Appointment with Time", () =>(
-      <Appointment
-        time= "12pm"
-      />
-    ))
-    .add("Header", () => <Header time="12pm" />)
-    .add("Empty", () => (
-      <Empty 
-        onAdd={action("onAdd")}
-      />
-    ))
+  .addParameters({
+      backgrounds: [{name: "white", value: "#fff", default: true}]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () =>(
+    <Appointment
+      time= "12pm"
+    />
+  ))
+  .add("Header", () => <Header time="12pm" />)
+  .add("Empty", () => (
+    <Empty 
+      onAdd={action("onAdd")}
+    />
+  ))
+  .add("Show", () => (
+    <Show
+      student={person.name}
+      interviewer={interviewer.name}
+      onEdit={action("onEdit")}
+      onDelete={action("onDelete")}
+    />
+  ))
+  .add("Confirm", () => (
+    <Confirm
+      message="Delete the appointment?"
+      onConfirm={action("Confirmed")}
+      onCancel={action("Canceled")}
+    />
+  ))
 
