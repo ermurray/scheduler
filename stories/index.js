@@ -97,7 +97,7 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
           id={interviewer.id}
           name={interviewer.name}
           avatar={interviewer.avatar}
-          setInterviewer={action("setInterviewer")}
+          setInterviewer={action("setInterviewer")(interviewer.id)}
         />
       ));
 
@@ -122,7 +122,7 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
         .add("Preselected", () => (
           <InterviewerList
             interviewers={interviewers}
-            interviewer={3}
-            setInterviewer={action("setInterviewer")}
+            value={3}
+            onChange={action("setInterviewer")}
           />
         ));
