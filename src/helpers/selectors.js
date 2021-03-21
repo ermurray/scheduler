@@ -1,3 +1,4 @@
+//selector for appointments by day
 const getAppointmentsForDay = function(state, day) {
   let aptForDay = [];
   const { days, appointments } = state;
@@ -15,6 +16,7 @@ const getAppointmentsForDay = function(state, day) {
   };
   return aptForDay;
 };
+//selector for interview
 const getInterview = function(state, interview) {
   if (!interview) {
     return null;
@@ -24,7 +26,28 @@ const getInterview = function(state, interview) {
       student: interview.student,
       interviewer: state.interviewers[interviewerID]
     };
+}
 
+//selector for interviewers
+
+const getInterviewersForDay = function(state, day) {
+  let interviewerForDay = [];
+  const { days, interviewers } = state;
+  let intArr = [];
+  days.forEach(elm => {
+    if(elm.name === day){
+        intArr = [...elm.interviewers]
+    }
+  });
+
+  for (const interviewer in interviewers) {
+    if(intArr.includes(Number(interviewer))){
+      interviewerForDay.push(interviewers[interviewer]);
+    }
+  };
+  return interviewerForDay;
 
 }
-export {getAppointmentsForDay, getInterview}
+
+
+export {getAppointmentsForDay, getInterview, getInterviewersForDay}
