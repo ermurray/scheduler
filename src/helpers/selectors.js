@@ -20,9 +20,6 @@ const getInterview = function(state, interview) {
     return null;
   };
   let interviewerID = interview.interviewer
-  console.log(interview.student)
-  console.log(state.interviewers[interviewerID])
-  
     return {
       student: interview.student,
       interviewer: state.interviewers[interviewerID]
