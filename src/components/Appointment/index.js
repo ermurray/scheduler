@@ -6,11 +6,14 @@ import Empty from './Empty';
 import Form from './Form';
 import Status from './Status';
 import useVisualMode from '../../hooks/useVisualMode';
+import Confirm from './Confirm';
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVE = "SAVE";
+const DELETE = "DELETE";
+const EDIT = "EDIT";
 export default function Appointment(props) {
   const save = function(name, interviewer) {
     const interview = {
@@ -27,8 +30,18 @@ export default function Appointment(props) {
     });
     }
   };
-  const deleteAppt = function() {
+  const deleteAppt = function(name, interviewer) {
+      const interview = null
     console.log('attempting to delete')
+    transition(SAVE)
+    props.cancelInterview(props.id, interview).then((res,error) =>{
+      if(res === 204) {
+        transition(EMPTY)
+
+      }
+
+    })
+
   }
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
   return(
@@ -45,9 +58,19 @@ export default function Appointment(props) {
         <Show 
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={deleteAppt}
+          onDelete={(SHOW)=> transition(DELETE)}
+          onEdit={(SHOW) => transition(EDIT)}
         />
-      )}
+        )}
+        {mode === EDIT && <Form
+          // value={props.state.interview.student}
+
+
+        />}
+        {mode === DELETE && 
+        <Confirm 
+          onConfirm={deleteAppt}
+        />}
     </article>
     
   );
