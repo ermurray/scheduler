@@ -14,6 +14,8 @@ const CREATE = "CREATE";
 const SAVE = "SAVE";
 const DELETE = "DELETE";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 export default function Appointment(props) {
   const save = function(name, interviewer) {
     const interview = {
@@ -63,9 +65,11 @@ export default function Appointment(props) {
         />
         )}
         {mode === EDIT && <Form
-          // value={props.state.interview.student}
-
-
+          interviewers={props.interviewers}
+          name={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+          onCancel={(SHOW)=> back()}
+          onSave={save}
         />}
         {mode === DELETE && 
         <Confirm 
