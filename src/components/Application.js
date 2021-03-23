@@ -28,8 +28,8 @@ export default function Application(props) {
       [id]: appointment
     }
     return axios.delete(`api/appointments/${appointment.id}`, appointment)
-    .then( (res, error) => {
-      if(error) return error;
+    .then( (res) => {
+  
       const status = res.status
       setState(prev =>({
         ...prev,
@@ -48,8 +48,7 @@ export default function Application(props) {
       [id]: appointment
     };
     
-   return axios.put(`api/appointments/${appointment.id}`, appointment).then((res,error) => {
-     if (error) return error;
+   return axios.put(`api/appointments/${appointment.id}`, appointment).then((res) => {
      const status = res.status
       setState(prev => ({
         ...prev,

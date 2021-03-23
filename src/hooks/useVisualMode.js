@@ -4,11 +4,12 @@ import { useState } from 'react';
 export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
-  const transition = (next, replace = false) => {
+  const transition = (next, replace=false) => {
     if (replace) {
        history.pop();
+       setHistory(history);
       }
-    setHistory((history) => [...history, next]);
+    setHistory((prevhistory) => [...prevhistory, next]);
     setMode(next);
     }
 
