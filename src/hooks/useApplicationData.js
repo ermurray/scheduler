@@ -2,8 +2,23 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function useApplicationData() {
-
-
+    // const updateSpots = function(day, days, appointments){
+    //   console.log("inside updateSpots",appointments)
+    //   const selectedDay = days.find(elm => elm.name === day )
+    //   const apptArrByDay = selectedDay.appointments
+    //   const apptsAvailable = apptArrByDay.map(id => appointments[id].interview).filter(elm => elm ===null)
+    //   console.log('appointments available ', apptsAvailable)
+    //   const currentSpots =  apptsAvailable.length
+    //     return currentSpots;
+    // };
+    const updateSpots = function(spot) {
+      const selectedDay = state.days.find(day => day.name === state.day);
+      const dayID = selectedDay.id;
+      const updateDays = [...state.days];
+      updateDays.forEach(day => day.id === dayID ? day.spots += spot : day);
+      console.log(updateDays);
+      return updateDays;
+    };
 
   const [state, setState] = useState({
     day:"Monday",
@@ -13,8 +28,6 @@ export default function useApplicationData() {
   });
   const setDay = day => setState({...state, day});
   const cancelInterview = function(id, interview) {
-    console.log(id)
-    console.log(state.appointments[id].interview)
     const appointment = { 
       ...state.appointments[id],
       interview: {...interview}
@@ -23,13 +36,16 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     }
+    const days = updateSpots(1)
+    
     return axios.delete(`api/appointments/${appointment.id}`, appointment)
     .then( (res) => {
-
+      
       const status = res.status
       setState(prev =>({
         ...prev,
-        appointments
+        appointments,
+        days
       }));
       return status;
     })    
@@ -43,15 +59,17 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    const days = updateSpots(-1)
     
-  return axios.put(`api/appointments/${appointment.id}`, appointment).then((res) => {
-    const status = res.status
+    return axios.put(`api/appointments/${appointment.id}`, appointment).then((res) => {
+      const status = res.status
       setState(prev => ({
         ...prev,
-        appointments
+        appointments,
+        days
       }));
       return status;
-    });
+      });
   }
 
   useEffect(() => {
@@ -68,6 +86,5 @@ export default function useApplicationData() {
       
     })
   }, []);
-
  return { state, setDay, bookInterview, cancelInterview}
 }
