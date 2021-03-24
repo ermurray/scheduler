@@ -18,6 +18,7 @@ const DELETING = "Deleting";
 const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
+
 export default function Appointment(props) {
   const save = function(name, interviewer) {
     const interview = {
@@ -55,7 +56,7 @@ export default function Appointment(props) {
   }
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
   return(
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={(EMPTY) => transition(CREATE)}/>}
        {mode === CREATE && <Form
