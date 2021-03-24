@@ -27,3 +27,6 @@ npm run storybook
 ```
 ## What it Looks like
 
+!["Main"](https://github.com/ermurray/scheduler/blob/master/docs/Screen%20Shot%202021-03-24%20at%204.35.46%20PM.png?raw=true)
+!["Confirm"](https://github.com/ermurray/scheduler/blob/master/docs/Screen%20Shot%202021-03-24%20at%204.36.06%20PM.png?raw=true)
+
