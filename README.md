@@ -1,8 +1,12 @@
 # Interview Scheduler
 
+Interview Scheduler is a education project from Week 7 and 8 in the lighthouse labs web dev BootCamp. Throught this project we were able to learn about React, Storybook, Jest, and Cypress.
+
+
 ## Setup
 
 Install dependencies with `npm install`.
+will Require scheduler-api https://github.com/ermurray/scheduler-api
 
 ## Running Webpack Development Server
 
@@ -21,3 +25,5 @@ npm test
 ```sh
 npm run storybook
 ```
+## What it Looks like
+
