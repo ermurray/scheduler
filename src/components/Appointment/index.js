@@ -25,7 +25,7 @@ export default function Appointment(props) {
       interviewer
     };
 
-    if (interview.student && interview.interviewer){
+    if (interview.interviewer){
       transition(SAVING)
       props.bookInterview(props.id, interview).then((res) => {
       if( res === 204){
