@@ -16,7 +16,6 @@ export default function useApplicationData() {
       const dayID = selectedDay.id;
       const updateDays = [...state.days];
       updateDays.forEach(day => day.id === dayID ? day.spots += spot : day);
-      console.log(updateDays);
       return updateDays;
     };
 
