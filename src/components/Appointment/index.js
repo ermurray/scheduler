@@ -28,13 +28,12 @@ export default function Appointment(props) {
 
     if (interview.interviewer){
       transition(SAVING)
-      props.bookInterview(props.id, interview).then((res) => {
+      props.bookInterview(props.id, interview, mode).then((res) => {
       if( res === 204){
         transition(SHOW);
       }
     })
     .catch((error) =>{
-      console.log(error);
       transition(ERROR_SAVE, true)
 
     });
@@ -82,6 +81,7 @@ export default function Appointment(props) {
         />
         )}
         {mode === EDIT && <Form
+          mode='EDIT'
           interviewers={props.interviewers}
           name={props.interview.student}
           interviewer={props.interview.interviewer.id}

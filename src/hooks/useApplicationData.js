@@ -49,7 +49,7 @@ export default function useApplicationData() {
       return status;
     })    
   }
-  const bookInterview = function(id, interview) {
+  const bookInterview = function(id, interview, mode) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -58,8 +58,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    const days = updateSpots(-1)
-    
+    const days = mode === "EDIT"? updateSpots(0) : updateSpots(-1)
     return axios.put(`api/appointments/${appointment.id}`, appointment).then((res) => {
       const status = res.status
       setState(prev => ({
