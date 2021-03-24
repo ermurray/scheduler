@@ -96,10 +96,12 @@ export default function Appointment(props) {
         />}
         {mode === ERROR_SAVE && 
         <Error
+          message={"Error Saving"}
           onClose={(ERROR_SAVE)=> back()}
         />}
         {mode === ERROR_DELETE && 
         <Error
+          message={"Error Deleting"}
           onClose={(ERROR_DELETE)=> back()}
         />
         }
